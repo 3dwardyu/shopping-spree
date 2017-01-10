@@ -20,6 +20,8 @@ function addItems(items) {
   for (i = itemCount; i < 5; i++) {
   var addItem = document.createElement("img");
   addItem.setAttribute("src", clothes.image);
+  addItem.setAttribute("data-score", clothes.points);
+  addItem.setAttribute("class", "clothes");
   addItem.setAttribute("height", "150px");
   addItem.setAttribute("width", "120px");
   document.getElementById("shopping-floor").appendChild(addItem);
@@ -28,17 +30,28 @@ function addItems(items) {
 };
 
 
+
+
 function startGame() {
 
 };
 
-function addScore() {
-  var points = 10;
+function addScore(points) {
   score += points;
   document.getElementsByClassName("currentscore")[0].innerHTML = "Score : " + score;
 
 };
 addItems();
-addScore();
 
+for (i = 0; i < itemCount; i++) {
+var clicked = this.getElementsByClassName("clothes")[i];
+clicked.onclick = function() {
+  points = parseInt(this.getAttributeNode("data-score").value);
+  point = this.getAttributeNode("data-score").value;
+  console.log("clicked");
+  console.log(point);
+  console.log(points);
+  addScore(points);
+};
+};
 })
