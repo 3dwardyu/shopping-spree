@@ -17,7 +17,13 @@ var food = {
   class: "food"
 };
 
-var items = [clothes, food];
+ var book = {
+   points: 5,
+   image: "http://megaicons.net/static/img/icons_sizes/8/178/128/printed-matter-book-icon.png",
+   class: "book"
+ }
+
+var items = [clothes, food, book];
 
 function addItems() {
   for (i = itemCount; i < 15; i++) {
@@ -29,34 +35,37 @@ function addItems() {
   addItem.setAttribute("class", "item");
   addItem.setAttribute("height", "30px");
   addItem.setAttribute("width", "24px");
+  addItem.style.top = Math.ceil(Math.random() * 410) + "px";
+  addItem.style.left = Math.ceil(Math.random() * 460) + "px";
   document.getElementById("shopping-floor").appendChild(addItem);
+
   itemCount++
 }
 };
 
-function startGame() {
-
-};
 
 function addScore(points) {
   score += points;
   document.getElementsByClassName("currentscore")[0].innerHTML = "Score : " + score;
 
 };
-addItems();
 
 
-for (i = 0; i < itemCount; i++) {
+function startGame() {
+  addItems();
+  for (i = 0; i < itemCount; i++) {
 
-document.getElementsByClassName("item")[i].onclick = function () {
-  points = parseInt(this.getAttributeNode("data-score").value);
-  this.remove();
-  itemCount--
-  addScore(points);
-console.log(itemCount);
-addItems();
+    document.getElementsByClassName("item")[i].onclick = function () {
+      points = parseInt(this.getAttributeNode("data-score").value);
+      this.remove();
+      itemCount--
+      addScore(points);
+      console.log(itemCount);
+      addItems();
+    };
+  };
+
 };
-};
-
+startGame();
 
 })

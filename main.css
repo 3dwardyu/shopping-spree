@@ -1,5 +1,11 @@
 #shopping-floor{
   width: 600px;
-  height: 450;
+  height: 450px;
   border: solid 2px black;
+  position: relative;
+  overflow: hidden;
+}
+
+.item {
+  position: absolute;
 }
