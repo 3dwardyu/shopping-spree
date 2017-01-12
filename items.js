@@ -50,7 +50,7 @@ function addItems() {
     addItem.style.height = "30px";
     addItem.style.width = "24px";
     addItem.style.top = Math.ceil(Math.random() * 410) + "px";
-    addItem.style.left = Math.ceil(Math.random() * 460) + "px";
+    addItem.style.left = Math.ceil(Math.random() * 560) + "px";
     addItem.addEventListener('click', removeItem);
 
     document.getElementById("shopping-floor").appendChild(addItem);
@@ -60,6 +60,7 @@ function addItems() {
 
 
 function startGame() {
+
   for (i = 0; i < 15; i++) {
     addItems();
 
