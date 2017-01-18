@@ -45,38 +45,47 @@ function addItems() {
     addItem.setAttribute("src", item.image);
     addItem.setAttribute("data-score", item.points);
     addItem.setAttribute("data-id", itemCount);
-    addItem.setAttribute("class", "item");
-    addItem.setAttribute("class", "draggable");
+    addItem.className = 'item draggable';
+    // addItem.setAttribute("class", "item");
+    // addItem.setAttribute("class", "draggable");
     addItem.style.height = "30px";
     addItem.style.width = "24px";
     addItem.style.top = Math.ceil(Math.random() * 410) + "px";
     addItem.style.left = Math.ceil(Math.random() * 560) + "px";
-    addItem.addEventListener('click', removeItem);
+    // addItem.addEventListener('click', removeItem);
+    // addItem.addEventListener('click', dragMoveListener);
 
     document.getElementById("shopping-floor").appendChild(addItem);
 
 };
 
- interact('.draggable')
-  .draggable({
+ interact('.draggable').draggable({
     inertia: true,
     restrict: {
       restriction: "parent",
       endOnly: true,
       elementReact: { top: 0, left: 0, bottom: 1, right: 1 }
     },
-
     onmove: dragMoveListener
   });
-  function dragMoveListener (event) {
-    var target = event.target,
-    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-    target.style.trasform = 'translate(' + x + 'px, ' + y + 'px)';
+  interact('.dropzone').dropzone({
+    accept: '.draggable',
+    overlap: 0.75,
+    ondrop: function (event){
+    removeItem();
+    }
+
+  });
+  function dragMoveListener (event) {
+    var target = event.target;
+    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
-  }
+  };
 
 
 
