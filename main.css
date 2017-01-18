@@ -10,14 +10,18 @@
   position: absolute;
 }
 
-#shopping-cart {
+.cart {
   position: absolute;
 
   top: 80%;
   left: 45%;
 }
 
-#shopping-cart img {
+.cart img {
   height: 75px;
   width: 75px;
+}
+
+.cart {
+  border: solid 5px black;
 }
