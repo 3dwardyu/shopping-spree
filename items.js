@@ -30,7 +30,7 @@ function addScore(points) {
   document.getElementById("currentscore").innerHTML = "Score : " + score;
 
 };
-function removeItem() {
+function removeItem(item) {
   points = parseInt(this.dataset.score);
   addScore(points);
   this.remove();
@@ -69,11 +69,25 @@ function addItems() {
     onmove: dragMoveListener
   });
 
-  interact('.dropzone').dropzone({
+interact('.dropzone').dropzone({
     accept: '.draggable',
     overlap: 0.75,
+//     ondropactivate: function (event) {
+//
+//   event.target.classList.add('drop-active');
+// },
+// ondragenter: function (event) {
+//   var draggableElement = event.relatedTarget,
+//       dropzoneElement = event.target;
+//       document.getElementById('cart').style.border('solid 5px red');
+// },
     ondrop: function (event){
-    removeItem();
+      console.log(event);
+      var item = event.relatedTarget;
+    points = parseInt(item.dataset.score);
+    addScore(points);
+    item.remove();
+      addItems();
     }
 
   });
