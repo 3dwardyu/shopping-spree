@@ -138,16 +138,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     var clear = clearInterval(startTimer);
     clearBoard();
     startScreen();
-    currentGameScore = score;
-    document.getElementById('currentgamescore').innerHTML = "Currentscore : " + currentGameScore;
-    if (currentGameScore > highScore) {
-      highScore = currentGameScore;
-    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
-  }
-  else {
-    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
-  }
-
+    postScore();
   };
 
   function updateTimer() {
@@ -175,6 +166,18 @@ document.addEventListener("DOMContentLoaded", function(event){
       addItem();
     };
   };
+
+  function postScore(){
+    currentGameScore = score;
+    document.getElementById('currentgamescore').innerHTML = "Currentscore : " + currentGameScore;
+    if (currentGameScore > highScore) {
+      highScore = currentGameScore;
+    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+  }
+  else {
+    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+  }
+};
 
 
   startScreen();
