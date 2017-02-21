@@ -14,6 +14,11 @@
   transform: translateY(-50%);
 }
 
+#start-button {
+  font-size: 1.5rem;
+  color: green;
+}
+
 #gameboard {
   visibility: hidden;
 }
@@ -32,4 +37,13 @@
 .cart img {
   height: 75px;
   width: 75px;
+}
+
+#highscore {
+  font-size: 1.25rem;
+  color: blue;
+}
+
+#currentgamescore {
+  font-size: 1rem;
 }

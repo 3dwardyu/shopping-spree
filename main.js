@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event){
   itemCount = 0;
   var score;
   var timer;
-  var time = 30;
+  var time = 3;
   var startTimer;
   var highScore = 0;
 
@@ -179,14 +179,13 @@ document.addEventListener("DOMContentLoaded", function(event){
 
   // Calculates the highscore and posts both highscore and current score
   function postScore(){
-    currentGameScore = score;
-    document.getElementById('currentgamescore').innerHTML = "Currentscore : " + currentGameScore;
-    if (currentGameScore > highScore) {
-      highScore = currentGameScore;
-    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+    document.getElementById('currentgamescore').innerHTML = "Score : " + score;
+    if (score > highScore) {
+      highScore = score;
+    document.getElementById('highscore').innerHTML = "High Score : " + highScore;
     }
     else {
-      document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+      document.getElementById('highscore').innerHTML = "High Score : " + highScore;
     }
   };
 
