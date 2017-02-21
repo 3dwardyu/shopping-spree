@@ -20,42 +20,42 @@ document.addEventListener("DOMContentLoaded", function(event){
   //creates objects with images and points
   var clothes = {
     points: 100,
-    image: "file:///Users/edwardyu/Desktop/projects/images/Tshirt.svg",
+    image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Tshirt.svg",
     class: "clothes"
   }
   var candy = {
     points: 10,
-    image: "file:///Users/edwardyu/Desktop/projects/images/Candy.svg",
+    image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Candy.svg",
     class: "candy"
   }
   var computer = {
    points: 500,
-   image: "file:///Users/edwardyu/Desktop/projects/images/Computer.svg",
+   image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Computer.svg",
    class: "computer"
   }
   var camera = {
    points: 300,
-   image: "file:///Users/edwardyu/Desktop/projects/images/Camera.svg",
+   image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Camera.svg",
    class: "book"
   }
   var shoes = {
    points: 50,
-   image: "file:///Users/edwardyu/Desktop/projects/images/Shoes.svg",
+   image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Shoes.svg",
    class: "shoes"
   }
   var cheese = {
    points: 35,
-   image: "file:///Users/edwardyu/Desktop/projects/images/Cheese.svg",
+   image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Cheese.svg",
    class: "cheese"
   }
   var toy = {
    points: 20,
-   image: "file:///Users/edwardyu/Desktop/projects/images/Lego.svg",
+   image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Lego.svg",
    class: "toy"
   }
   var glasses = {
    points: 50,
-   image: "file:///Users/edwardyu/Desktop/projects/images/Eyeglass.svg",
+   image: "https://s3-us-west-2.amazonaws.com/shoppingspree/Eyeglass.svg",
    class: "toy"
   }
 

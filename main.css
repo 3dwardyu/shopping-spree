@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   margin: auto;
-  background: url(file:///Users/edwardyu/Desktop/projects/images/floor.png) center repeat;
+  background: url(https://s3-us-west-2.amazonaws.com/shoppingspree/floor.png) center repeat;
   background-size: cover;
 }
 
