@@ -1,65 +1,77 @@
 document.addEventListener("DOMContentLoaded", function(event){
+  itemCount = 0;
+  var score;
+  var timer;
+  var time;
+  var startTimer;
+  var gameOn = false;
 
-var itemCount = 0;
-var score = 0;
-
-//creates objects with images and points
-var clothes = {
-  points: 10,
-  image: "http://www.clker.com/cliparts/D/R/Z/B/W/g/white-tee-md.png",
-  class: "clothes"
-};
-
-var food = {
-  points: 3,
-  image: "http://www.free-icons-download.net/images/cake-icon-46133.png",
-  class: "food"
-};
-
- var book = {
-   points: 5,
-   image: "http://megaicons.net/static/img/icons_sizes/8/178/128/printed-matter-book-icon.png",
+  //creates objects with images and points
+  var clothes = {
+    points: 100,
+    image: "file:///Users/edwardyu/Desktop/projects/images/Tshirt.svg",
+    class: "clothes"
+  }
+  var candy = {
+    points: 10,
+    image: "file:///Users/edwardyu/Desktop/projects/images/Candy.svg",
+    class: "candy"
+  }
+  var computer = {
+   points: 500,
+   image: "file:///Users/edwardyu/Desktop/projects/images/Computer.svg",
+   class: "computer"
+  }
+  var camera = {
+   points: 300,
+   image: "file:///Users/edwardyu/Desktop/projects/images/Camera.svg",
    class: "book"
- }
+  }
+  var shoes = {
+   points: 50,
+   image: "file:///Users/edwardyu/Desktop/projects/images/Shoes.svg",
+   class: "shoes"
+  }
+  var cheese = {
+   points: 35,
+   image: "file:///Users/edwardyu/Desktop/projects/images/Cheese.svg",
+   class: "cheese"
+  }
+  var toy = {
+   points: 20,
+   image: "file:///Users/edwardyu/Desktop/projects/images/Lego.svg",
+   class: "toy"
+  }
+  var glasses = {
+   points: 50,
+   image: "file:///Users/edwardyu/Desktop/projects/images/Eyeglass.svg",
+   class: "toy"
+  }
 
-var items = [clothes, food, book];
+  //puts items into an array to be selected at random
+  var items = [clothes, candy, computer, camera, shoes, cheese, toy, glasses];
 
-//function to add score
-function addScore(points) {
-  score += points;
-  document.getElementById("currentscore").innerHTML = "Score : " + score;
+  //function to add score
+  function addScore(points) {
+    score += points;
+    document.getElementById("currentscore").innerHTML = "Score : " + score;
+  };
 
-};
-function removeItem(item) {
-  points = parseInt(this.dataset.score);
-  addScore(points);
-  this.remove();
-  addItems();
-
-};
-
-// function to add items to screen with eventlistener
-function addItems() {
+  // function to add items to screen with eventlistener
+  function addItem() {
     var item = items[Math.floor(Math.random() * items.length)];
     var addItem = document.createElement("img");
     addItem.setAttribute("src", item.image);
     addItem.setAttribute("data-score", item.points);
     addItem.setAttribute("data-id", itemCount);
     addItem.className = 'item draggable';
-    // addItem.setAttribute("class", "item");
-    // addItem.setAttribute("class", "draggable");
-    addItem.style.height = "30px";
-    addItem.style.width = "24px";
     addItem.style.top = Math.ceil(Math.random() * 410) + "px";
     addItem.style.left = Math.ceil(Math.random() * 560) + "px";
-    // addItem.addEventListener('click', removeItem);
-    // addItem.addEventListener('click', dragMoveListener);
-
     document.getElementById("shopping-floor").appendChild(addItem);
+  };
 
-};
-
- interact('.draggable').draggable({
+  //interact library that allows drag and drop
+  interact('.draggable').draggable({
     inertia: true,
     restrict: {
       restriction: "parent",
@@ -69,46 +81,96 @@ function addItems() {
     onmove: dragMoveListener
   });
 
-interact('.dropzone').dropzone({
+  //removes items and calculates the points once dropped
+  interact('.dropzone').dropzone({
     accept: '.draggable',
     overlap: 0.75,
-//     ondropactivate: function (event) {
-//
-//   event.target.classList.add('drop-active');
-// },
-// ondragenter: function (event) {
-//   var draggableElement = event.relatedTarget,
-//       dropzoneElement = event.target;
-//       document.getElementById('cart').style.border('solid 5px red');
-// },
     ondrop: function (event){
-      console.log(event);
       var item = event.relatedTarget;
-    points = parseInt(item.dataset.score);
-    addScore(points);
-    item.remove();
-      addItems();
+      points = parseInt(item.dataset.score);
+      addScore(points);
+      item.remove();
+      addItem();
     }
-
   });
+
+  //adds drag event listener
   function dragMoveListener (event) {
     var target = event.target;
     var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
     var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
     target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
   };
+  //
+  // function start() {
+  //   score = 0;
+  //   timer = 5000;
+  //   gameOn = true;
+  //   startScreen();
+  //   updateTimer();
+  // };
 
 
+  function startScreen(){
+    document.getElementById('startingscreen').style.display = "block";
+    document.getElementById('gameboard').style.visibility = "hidden";
+    document.getElementById('start-button').addEventListener("click", startGame);
+  }
 
-function startGame() {
-  for (i = 0; i < 15; i++) {
-    addItems();
+  function clearScreen(){
+
+    document.getElementById('startingscreen').style.display = "none";
+    document.getElementById('gameboard').style.visibility = "visible";
+
+  }
+
+  function startGame(){
+    clearScreen();
+    score = 0;
+    time = 3;
+    timer = time;
+    gameOn = true;
+    fillBoard();
+    runTimer();
+  }
+
+  function gameOver() {
+    gameOn = false;
+    var clear = clearInterval(startTimer);
+    console.log(startTimer);
+    clearBoard();
+    startScreen();
+    document.getElementById('highscore').innerHTML = "Highscore : " + score;
   };
-};
+
+  function updateTimer() {
+    var currenttime = timer - 1;
+    timer = currenttime;
+    document.getElementById("currenttime").innerHTML = "Time : " + currenttime;
+    if (timer < 0) {
+      gameOver();
+    }
+  }
+
+  function runTimer(){
+    startTimer = setInterval(updateTimer,1000)
+  };
 
 
-startGame();
+  function clearBoard(){
+    var clearitem = document.getElementsByClassName('item');
+    while (clearitem.length > 0) {
+      clearitem[0].parentNode.removeChild(clearitem[0]);
+    }
+  }
+
+  function fillBoard() {
+    for (i = 0; i < 30; i++) {
+      addItem();
+    };
+  };
+
+  startScreen();
 })

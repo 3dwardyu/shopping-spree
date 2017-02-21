@@ -4,15 +4,27 @@
   border: solid 2px black;
   position: relative;
   overflow: hidden;
+  margin: auto;
+}
+
+#startingscreen {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#gameboard {
+  visibility: hidden;
 }
 
 .item {
   position: absolute;
+  width: 50px;
 }
 
 .cart {
   position: absolute;
-
   top: 80%;
   left: 45%;
 }
@@ -22,6 +34,7 @@
   width: 75px;
 }
 
-.cart {
-  border: solid 5px black;
+.shopping-floor{
+background: url(file:///Users/edwardyu/Desktop/projects/images/floor.png) center repeat;
+background-size: cover;
 }
