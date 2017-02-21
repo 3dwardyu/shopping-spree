@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event){
   itemCount = 0;
   var score;
   var timer;
-  var time = 3;
+  var time = 30;
   var startTimer;
   var highScore = 0;
 
