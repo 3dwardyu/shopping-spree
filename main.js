@@ -2,9 +2,20 @@ document.addEventListener("DOMContentLoaded", function(event){
   itemCount = 0;
   var score;
   var timer;
-  var time = 3;
+  var time = 30;
   var startTimer;
   var highScore = 0;
+
+  // Finds the size of your browser
+  var innerPageWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  var innerPageHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+  // Sets play area based on the size of your current broswer size
+  var playScreen = document.getElementById("shopping-floor");
+  var screenWidth = (innerPageWidth * 0.8)
+  var screenHeight = (innerPageHeight * 0.8)
+  playScreen.style.width = screenWidth + "px";
+  playScreen.style.height = screenHeight + "px";
 
   //creates objects with images and points
   var clothes = {
@@ -65,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function(event){
     addItem.setAttribute("data-score", item.points);
     addItem.setAttribute("data-id", itemCount);
     addItem.className = 'item draggable';
-    addItem.style.top = Math.ceil(Math.random() * 410) + "px";
-    addItem.style.left = Math.ceil(Math.random() * 560) + "px";
+    addItem.style.top = Math.ceil(Math.random() * (screenHeight - 50)) + "px";
+    addItem.style.left = Math.ceil(Math.random() * (screenWidth - 50)) + "px";
     document.getElementById("shopping-floor").appendChild(addItem);
   };
 
@@ -103,22 +114,15 @@ document.addEventListener("DOMContentLoaded", function(event){
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
   };
-  //
-  // function start() {
-  //   score = 0;
-  //   timer = 5000;
-  //   gameOn = true;
-  //   startScreen();
-  //   updateTimer();
-  // };
 
-
+  // Intro screen, removes the gameboard
   function startScreen(){
     document.getElementById('startingscreen').style.display = "block";
     document.getElementById('gameboard').style.visibility = "hidden";
     document.getElementById('start-button').addEventListener("click", startGame);
   }
 
+  // Removes the starts screen and shows gameboard
   function clearScreen(){
     document.getElementById('startingscreen').style.display = "none";
     document.getElementById('gameboard').style.visibility = "visible";
@@ -126,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     document.getElementById("currenttime").innerHTML = "Time : " + time;
   }
 
+  // Starts the game by clearing the start screen, filling the board and starting timer
   function startGame(){
     score = 0;
     timer = time;
@@ -134,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     runTimer();
   }
 
+  // The game end, clears the board and shows the start screen with scores
   function gameOver() {
     var clear = clearInterval(startTimer);
     clearBoard();
@@ -141,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     postScore();
   };
 
+  // Updates and counts down the timer on screen
   function updateTimer() {
     var currenttime = timer - 1;
     timer = currenttime;
@@ -150,35 +157,38 @@ document.addEventListener("DOMContentLoaded", function(event){
     }
   }
 
+  // Sets a countdown timer
   function runTimer(){
     startTimer = setInterval(updateTimer,1000)
   };
 
+  // Removes all the items from the board
   function clearBoard(){
     var clearitem = document.getElementsByClassName('item');
     while (clearitem.length > 0) {
       clearitem[0].parentNode.removeChild(clearitem[0]);
     }
-  }
-
-  function fillBoard() {
-    for (i = 0; i < 30; i++) {
-      addItem();
-    };
   };
 
+  // Fill the game board with 45 items
+  function fillBoard() {
+    for (i = 0; i < 45; i++) {
+      addItem();
+    }
+  };
+
+  // Calculates the highscore and posts both highscore and current score
   function postScore(){
     currentGameScore = score;
     document.getElementById('currentgamescore').innerHTML = "Currentscore : " + currentGameScore;
     if (currentGameScore > highScore) {
       highScore = currentGameScore;
     document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
-  }
-  else {
-    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
-  }
-};
-
+    }
+    else {
+      document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+    }
+  };
 
   startScreen();
 })
