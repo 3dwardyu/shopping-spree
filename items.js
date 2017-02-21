@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function(event){
   itemCount = 0;
   var score;
   var timer;
-  var time;
+  var time = 3;
   var startTimer;
-  var gameOn = false;
+  var highScore = 0;
 
   //creates objects with images and points
   var clothes = {
@@ -120,29 +120,34 @@ document.addEventListener("DOMContentLoaded", function(event){
   }
 
   function clearScreen(){
-
     document.getElementById('startingscreen').style.display = "none";
     document.getElementById('gameboard').style.visibility = "visible";
-
+    document.getElementById("currentscore").innerHTML = "Score : " + score;
+    document.getElementById("currenttime").innerHTML = "Time : " + time;
   }
 
   function startGame(){
-    clearScreen();
     score = 0;
-    time = 3;
     timer = time;
-    gameOn = true;
+    clearScreen();
     fillBoard();
     runTimer();
   }
 
   function gameOver() {
-    gameOn = false;
     var clear = clearInterval(startTimer);
-    console.log(startTimer);
     clearBoard();
     startScreen();
-    document.getElementById('highscore').innerHTML = "Highscore : " + score;
+    currentGameScore = score;
+    document.getElementById('currentgamescore').innerHTML = "Currentscore : " + currentGameScore;
+    if (currentGameScore > highScore) {
+      highScore = currentGameScore;
+    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+  }
+  else {
+    document.getElementById('highscore').innerHTML = "Highscore : " + highScore;
+  }
+
   };
 
   function updateTimer() {
@@ -158,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function(event){
     startTimer = setInterval(updateTimer,1000)
   };
 
-
   function clearBoard(){
     var clearitem = document.getElementsByClassName('item');
     while (clearitem.length > 0) {
@@ -171,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function(event){
       addItem();
     };
   };
+
 
   startScreen();
 })
