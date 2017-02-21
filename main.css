@@ -1,10 +1,10 @@
 #shopping-floor{
-  /*width: 600px;
-  height: 450px;*/
   border: solid 2px black;
   position: relative;
   overflow: hidden;
   margin: auto;
+  background: url(file:///Users/edwardyu/Desktop/projects/images/floor.png) center repeat;
+  background-size: cover;
 }
 
 #startingscreen {
@@ -32,9 +32,4 @@
 .cart img {
   height: 75px;
   width: 75px;
-}
-
-.shopping-floor{
-background: url(file:///Users/edwardyu/Desktop/projects/images/floor.png) center repeat;
-background-size: cover;
 }
